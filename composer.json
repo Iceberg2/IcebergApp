@@ -1,27 +1,28 @@
 {
-  "name": "iceberg2/iceberg-app",
-  "description": "Iceberg Application",
-  "homepage": "https://github.com/iceberg2/iceberg-app",
-  "type": "project",
-  "minimum-stability": "stable",
-  "keywords": ["iceberg"],
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Marc Mascort Bou",
-      "email": "marc@articstudio.com",
-      "homepage": "http://www.articstudio.com"
+    "name": "iceberg2/iceberg-app",
+    "description": "Iceberg Application",
+    "homepage": "https://github.com/iceberg2/iceberg-app",
+    "type": "project",
+    "minimum-stability": "stable",
+    "keywords": ["iceberg"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marc Mascort Bou",
+            "email": "marc@articstudio.com",
+            "homepage": "http://www.articstudio.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "pimple/pimple": "^3.0",
+        "psr/container": "^1.0",
+        "vlucas/phpdotenv": "^2.4",
+        "illuminate/database": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Articstudio\\IcebergApp\\": "src/"
+        }
     }
-  ],
-  "require": {
-    "php": ">=5.6.0",
-    "pimple/pimple": "^3.0",
-    "vlucas/phpdotenv": "^2.2",
-    "illuminate/database": "~5.2"
-  },
-  "autoload": {
-    "psr-4": {
-      "IcebergApp\\": "src/"
-    }
-  }
 }
