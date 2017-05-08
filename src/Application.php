@@ -2,6 +2,7 @@
 
 namespace Articstudio\IcebergApp;
 
+use Articstudio\IcebergApp\SingletonTrait;
 use Articstudio\IcebergApp\Exception\TrowByTrait;
 use Articstudio\IcebergApp\ContainerAwareTrait;
 use Articstudio\IcebergApp\Container;
@@ -10,16 +11,14 @@ use Articstudio\IcebergApp\Provider\DefaultsProvider;
 use Articstudio\IcebergApp\Contract\Service AS ServiceContract;
 use Articstudio\IcebergApp\Exception\Service\NotFoundServiceManagerException;
 use Articstudio\IcebergApp\Exception\Service\InvalidServiceManagerException;
-use Articstudio\IcebergApp\Exception\Service\InvalidMiddlewareException;
 
 class Application {
 
+    use SingletonTrait;
     use TrowByTrait;
     use ContainerAwareTrait;
 
     const VERSION = '3.0.0';
-
-    private $container;
 
     public function __construct($container = []) {
         if (is_array($container)) {
@@ -29,11 +28,12 @@ class Application {
             throw new InvalidArgumentException(sprintf('Excpected a %s interface', ContainerContract::class));
         }
         $this->setContainer($container);
-        Container::setInstance($this->container);
+        self::setInstance($this);
     }
 
     public function init() {
-        $this->registerProviders();
+        $this->providers->add(DefaultsProvider::class);
+        $this->providers->register($this->container);
         return $this;
     }
 
@@ -56,31 +56,17 @@ class Application {
     }
 
     public function config() {
-        /* try {
-          $this->container->manager->middleware($this->container->settings->getService('middleware', []));
-          } catch (\InvalidArgumentException $exception) {
-          if ($this->exceptionThrownBy($exception, $this->container->settings->getService('manager'), \InvalidArgumentException::class, 'middleware')) {
-          throw new InvalidMiddlewareException('Invalid Middleware', null, $exception);
-          } else {
-          throw $exception;
-          }
-          }
-          $this->container->manager->config($this->container->settings->getService('config', [])); */
+        $this->container->service->config();
         return $this;
     }
 
     public function run() {
-        //$this->container->manager->run($this->container->settings->getService('run', []));
+        $this->container->service->run();
         return $this;
     }
 
     public function version() {
-        return static::VERSION;
-    }
-
-    private function registerProviders() {
-        $this->providers->add(DefaultsProvider::class);
-        $this->providers->register($this->container);
+        return self::VERSION;
     }
 
 }

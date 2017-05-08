@@ -18,8 +18,6 @@ class Container extends PimpleContainer implements ContainerContract {
 
     use TrowByTrait;
 
-    protected static $instance;
-
     public function __construct(array $settings = []) {
         parent::__construct();
         $this->registerSettings($settings);
@@ -70,14 +68,6 @@ class Container extends PimpleContainer implements ContainerContract {
         $this['providers'] = function () {
             return new AppProviders($this->get('settings')->get('providers', []));
         };
-    }
-
-    public static function getInstance(): ContainerContract {
-        return static::$instance;
-    }
-
-    public static function setInstance(ContainerContract $container) {
-        static::$instance = $container;
     }
 
 }

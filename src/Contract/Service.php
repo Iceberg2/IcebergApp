@@ -6,15 +6,13 @@ interface Service {
 
     public function load(Array $settings = []);
 
-    public function middleware(Array $settings = []);
+    public function config();
 
-    public function config(Array $settings = []);
+    public function run();
 
-    public function run(Array $settings = []);
+    public function getServiceApp();
 
-    public function getService();
-
-    public function setService($service);
+    public function setServiceApp($service_app);
 
     public function getServiceContainer();
 }
