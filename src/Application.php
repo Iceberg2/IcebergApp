@@ -56,21 +56,21 @@ class Application {
     }
 
     public function config() {
-        try {
-            $this->container->manager->middleware($this->container->settings->getService('middleware', []));
-        } catch (\InvalidArgumentException $exception) {
-            if ($this->exceptionThrownBy($exception, $this->container->settings->getService('manager'), \InvalidArgumentException::class, 'middleware')) {
-                throw new InvalidMiddlewareException('Invalid Middleware', null, $exception);
-            } else {
-                throw $exception;
-            }
-        }
-        $this->container->manager->config($this->container->settings->getService('config', []));
+        /* try {
+          $this->container->manager->middleware($this->container->settings->getService('middleware', []));
+          } catch (\InvalidArgumentException $exception) {
+          if ($this->exceptionThrownBy($exception, $this->container->settings->getService('manager'), \InvalidArgumentException::class, 'middleware')) {
+          throw new InvalidMiddlewareException('Invalid Middleware', null, $exception);
+          } else {
+          throw $exception;
+          }
+          }
+          $this->container->manager->config($this->container->settings->getService('config', [])); */
         return $this;
     }
 
     public function run() {
-        $this->container->manager->run($this->container->settings->getService('run', []));
+        //$this->container->manager->run($this->container->settings->getService('run', []));
         return $this;
     }
 
