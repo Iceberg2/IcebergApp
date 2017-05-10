@@ -5,7 +5,7 @@
 namespace Articstudio\IcebergApp;
 
 use Pimple\Container as PimpleContainer;
-use Articstudio\IcebergApp\Contracts\Container as ContainerContract;
+use Articstudio\IcebergApp\Contract\Container as ContainerContract;
 use Articstudio\IcebergApp\Exception\TrowByTrait;
 use Articstudio\IcebergApp\Support\Collection;
 use Articstudio\IcebergApp\Provider\AppProviders;
