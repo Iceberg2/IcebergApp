@@ -8,5 +8,5 @@ interface Environment {
 
     public function set($name, $value = null);
 
-    public function has();
+    public function has($name);
 }
