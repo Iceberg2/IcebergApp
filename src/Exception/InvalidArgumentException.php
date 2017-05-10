@@ -1,11 +1,10 @@
 <?php
 
-namespace IcebergApp\Exception;
+namespace Articstudio\IcebergApp\Exception;
 
-use IcebergApp\Contracts\Exception\Exception as ExceptionContract;
+use Articstudio\IcebergApp\Contract\Exception as ExceptionContract;
 use InvalidArgumentException as PHPInvalidArgumentException;
 
-class InvalidArgumentException extends PHPInvalidArgumentException implements ExceptionContract
-{
-  //
+class InvalidArgumentException extends PHPInvalidArgumentException implements ExceptionContract {
+    //
 }

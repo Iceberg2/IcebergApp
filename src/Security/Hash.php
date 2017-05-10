@@ -1,70 +1,52 @@
 <?php
 
-namespace IcebergApp\Security;
+namespace Articstudio\IcebergApp\Security;
 
-use IcebergApp\Container\Container;
+use Articstudio\IcebergApp\Support\Collection;
 
-class Hash
-{
+class Hash {
 
-  protected $salt = [];
+    const KEY_DEFAULT = 'default';
+    const KEY_NONCE = 'nonce';
+    const KEY_AUTH = 'auth';
+    const KEY_SESSION = 'session';
 
-  public function __construct(array $salt = [])
-  {
-    $this->salt = $salt;
-  }
+    protected $salt;
 
-  public static function makeCustom($string, $salt = null)
-  {
-    if ($salt)
-    {
-      return crypt($string, $salt);
+    public function __construct(array $salt = []) {
+        $this->salt = new Collection($salt);
     }
-    return crypt($string);
-  }
 
-  public static function verify($string, $hash)
-  {
-    return hash_equals($hash, crypt($string, $hash));
-  }
+    public function get($key = 'default') {
+        return $this->salt->get($key);
+    }
 
-  public static function make($string)
-  {
-    $hash = static::getInstance();
-    return static::makeCustom($string, $hash->getSalt('default'));
-  }
+    public function set($key, $value = null) {
+        return $this->salt->put($key, $value);
+    }
 
-  public static function makeNonce($string)
-  {
-    $hash = static::getInstance();
-    return static::makeCustom($string, $hash->getSalt('nonce'));
-  }
+    public function make($string) {
+        return static::Crypt($string, $this->get(self::KEY_DEFAULT));
+    }
 
-  public static function makeAuth($string)
-  {
-    $hash = static::getInstance();
-    return static::makeCustom($string, $hash->getSalt('auth'));
-  }
+    public function makeNonce($string) {
+        return static::Crypt($string, $this->get(self::KEY_NONCE));
+    }
 
-  public static function makeSession($string)
-  {
-    $hash = static::getInstance();
-    return static::makeCustom($string, $hash->getSalt('session'));
-  }
+    public function makeAuth($string) {
+        return static::Crypt($string, $this->get(self::KEY_AUTH));
+    }
 
-  public function getSalt($key = 'default')
-  {
-    return isset($this->salt[$key]) ? $this->salt[$key] : null;
-  }
+    public function makeSession($string) {
+        return static::Crypt($string, $this->get(self::KEY_SESSION));
+    }
 
-  public function setSalt($key, $value = null)
-  {
-    return ($this->salt[$key] = $value);
-  }
+    public static function Crypt($string, $salt = null) {
+        return crypt($string, $salt);
+    }
 
-  public static function getInstance()
-  {
-    return Container::getInstance()->hash;
-  }
+    public static function Verify($string, $hash) {
+        return hash_equals($hash, crypt($string, $hash));
+    }
 
 }

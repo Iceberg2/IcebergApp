@@ -1,11 +1,10 @@
 <?php
 
-namespace IcebergApp\Exception;
+namespace Articstudio\IcebergApp\Exception;
 
-use IcebergApp\Contracts\Exception\Exception as ExceptionContract;
+use Articstudio\IcebergApp\Contract\Exception as ExceptionContract;
 use RuntimeException as PHPRuntimeException;
 
-class RuntimeException extends PHPRuntimeException implements ExceptionContract
-{
-  //
+class RuntimeException extends PHPRuntimeException implements ExceptionContract {
+    //
 }
