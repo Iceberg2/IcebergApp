@@ -13,7 +13,7 @@ class Hash {
 
     protected $salt;
 
-    protected function __construct(array $salt = []) {
+    public function __construct(array $salt = []) {
         $this->salt = new Collection($salt);
     }
 
