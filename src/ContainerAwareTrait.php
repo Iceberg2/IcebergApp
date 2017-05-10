@@ -2,7 +2,7 @@
 
 namespace Articstudio\IcebergApp;
 
-use Articstudio\IcebergApp\Contracts\Container as ContainerContract;
+use Articstudio\IcebergApp\Contract\Container as ContainerContract;
 
 trait ContainerAwareTrait {
 
