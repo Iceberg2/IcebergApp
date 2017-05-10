@@ -2,7 +2,7 @@
 
 namespace Articstudio\IcebergApp\Provider;
 
-use Psr\Container\ContainerInterface as ContainerContract;
+use Articstudio\IcebergApp\Contract\Container as ContainerContract;
 use Articstudio\IcebergApp\Support\Collection;
 use Articstudio\IcebergApp\Exception\Provider\NotFoundException;
 use Exception;
