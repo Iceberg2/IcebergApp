@@ -18,8 +18,6 @@ class Application {
     use TrowByTrait;
     use ContainerAwareTrait;
 
-    const VERSION = '3.0.0';
-
     public function __construct($container = []) {
         if (is_array($container)) {
             $container = new Container($container);
@@ -63,10 +61,6 @@ class Application {
     public function run() {
         $this->container->service->run();
         return $this;
-    }
-
-    public function version() {
-        return self::VERSION;
     }
 
 }
