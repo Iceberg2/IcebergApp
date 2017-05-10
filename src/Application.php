@@ -32,8 +32,8 @@ class Application {
     }
 
     public function init() {
-        $this->providers->add(DefaultsProvider::class);
-        $this->providers->register($this->container);
+        $this->container->providers->add(DefaultsProvider::class);
+        $this->container->providers->register($this->container);
         return $this;
     }
 
