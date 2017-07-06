@@ -13,6 +13,7 @@ class DefaultsProvider implements ProviderContract {
 
     public function register(ContainerContract $container) {
         $this->registerEnvironment($container);
+        $this->registerDevMode($container);
         $this->registerDatabase($container);
         $this->registerHash($container);
         $this->registerToken($container);
@@ -24,6 +25,15 @@ class DefaultsProvider implements ProviderContract {
                 $env = new Environment($container->settings->get('env_path'), $container->settings->get('env_file'));
                 $env->load();
                 return $env;
+            };
+        }
+    }
+
+    public function registerDevMode(ContainerContract $container) {
+        if (!isset($container['isDevMode'])) {
+            $container['isDevMode'] = function ($container) {
+                $dev_mode = $container->env->get('DEV_MODE', '');
+                return ($dev_mode && !empty($dev_mode) && ($dev_mode === true || $dev_mode === 'true' || $dev_mode === 1 || $dev_mode === '1'));
             };
         }
     }
